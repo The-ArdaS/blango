@@ -48,7 +48,6 @@ class Dev(Configuration):
         "debug_toolbar",
         'crispy_forms',
         'crispy_bootstrap5',
-        'blog.apps.BlogConfig',
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
@@ -56,6 +55,8 @@ class Dev(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
         'rest_framework',
+        'rest_framework.authtoken',
+        'blog.apps.BlogConfig',
     ]
 
     MIDDLEWARE = [
@@ -192,3 +193,10 @@ class Prod(Dev):
     SECRET_KEY = values.SecretValue()
     
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ]
+}
