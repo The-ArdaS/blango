@@ -1,7 +1,8 @@
 from rest_framework import generics
 
-from api.serializers import PostSerializer
 from blog.models import Post
+from blog.api.serializers import PostSerializer
+from blog.api.permissions import AuthorModifyOrReadOnly, IsAdminUserForObject
 
 
 class PostList(generics.ListCreateAPIView):
@@ -12,3 +13,4 @@ class PostList(generics.ListCreateAPIView):
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = [AuthorModifyOrReadOnly | IsAdminUserForObject]
