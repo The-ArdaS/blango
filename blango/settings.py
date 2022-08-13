@@ -56,6 +56,7 @@ class Dev(Configuration):
         'django.contrib.staticfiles',
         'rest_framework',
         'rest_framework.authtoken',
+        'drf_yasg',
         'blog.apps.BlogConfig',
     ]
 
@@ -203,3 +204,10 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticatedOrReadOnly"
     ],
 }
+
+SWAGGER_SETTINGS = {
+        "SECURITY_DEFINITIONS": {
+            "Token": {"type": "apiKey", "name": "Authorization", "in": "header"},
+            "Basic": {"type": "basic"},
+        }
+    }
