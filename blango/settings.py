@@ -130,7 +130,7 @@ class Dev(Configuration):
 
     LANGUAGE_CODE = 'en-us'
 
-    TIME_ZONE = values.Value("Asia/Tehran")
+    TIME_ZONE = values.Value("UTC") #values.Value("Asia/Tehran")
 
     USE_I18N = True
 
