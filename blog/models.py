@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
+from versatileimagefield.fields import VersatileImageField, PPOIField
 
 
 class Comment(models.Model):
@@ -27,6 +28,10 @@ class Tag(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    hero_image = VersatileImageField(
+        upload_to="hero_images", ppoi_field="ppoi", null=True, blank=True
+    )
+    ppoi = PPOIField(null=True, blank=True)
     modified_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(blank=True, null=True, db_index=True)
     title = models.TextField(max_length=100)
