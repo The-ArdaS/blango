@@ -1,7 +1,8 @@
-from django.shortcuts import render
+import logging
+from django.urls import reverse
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
-import logging
+
 from blog.forms import CommentForm
 from blog.models import Post
 #from django.views.decorators.cache import cache_page
@@ -42,7 +43,10 @@ def post_detail(request, slug):
     return render(request, "blog/post-detail.html", {"post": post, "comment_form": comment_form})
 
 def post_table(request):
-    return render(request, "blog/post-table.html")
+    return render(
+        request, "blog/post-table.html", {"post_list_url": reverse("post-list")}
+    )
+
 
 def get_ip(request):
   from django.http import HttpResponse
